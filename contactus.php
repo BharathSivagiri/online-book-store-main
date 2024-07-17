@@ -17,12 +17,90 @@ include "php/func-category.php";
 $categories = get_all_categories($conn);
 
  ?>
+
+ <?php
+
+// $message_sent = false;
+
+//   // echo "<pre>";
+//   // print_r($_POST);
+//   // echo '</pre>';
+  
+//   if(isset($_POST['email']) && $_POST['email'] !=''){
+
+//       if( filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) ){
+
+//       //submits the form
+
+//       $userName = $_POST['fullname'];
+//       $useremail = $_POST['email'];
+//       $userphone = $_POST['phone'];
+//       $messageSubject = $_POST['subject'];
+//       $actualMessage = $_POST['message'];
+
+
+//       $to = "goodbookscontact24@gmail.com";
+//       $body = "";
+
+//       $body .= "From:".$userName. "\r\n";
+//       $body .= "E-Mail:".$useremail. "\r\n";
+//       $body .= "Phone no:".$userphone. "\r\n";
+//       $body .= "Message:".$actualMessage. "\r\n";
+
+//       mail($to,$messageSubject,$body);
+
+//       $message_sent = true;
+
+//       }
+//   }
+  $msg = '';
+  if(isset($_POST['submit'])){
+
+    require_once 'vendor/autoload.php';
+    require_once 'mailinfo.php';
+
+    // Create the Transport
+    $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
+      ->setUsername(EMAIL)
+      ->setPassword(PASS)
+    ;
+
+    // Create the Mailer using your created Transport
+    $mailer = new Swift_Mailer($transport);
+
+    // Create a message
+    $message = (new Swift_Message('From contact '))
+      ->setFrom([EMAIL=> 'GoodBooks Community Admin'])
+      ->setTo($_POST['email'])
+      ->setBody('From: '.$_POST['fullname']. '
+      <br>Email: '.$_POST['email'].'
+      <br>Phone: '.$_POST['phone'].'
+      <br>Subject: '.$_POST['subject'].'
+      <br>Message: '.$_POST['subject'], 'text/html')
+      ;
+
+    // Send the message
+    $result = $mailer->send($message);
+
+    if(!$result){
+      $msg = '<div class="alert alert-danger" role="alert">
+              Something wrong!
+              </div>';
+      }else{
+          $msg = '<div class="alert alert-success" role="alert">
+                  We will contact you shortly!
+                  </div>';
+
+      }
+    }
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>GoodBooks - About Us</title>
+	<title>GoodBooks - Contact Us</title>
 
     <!-- bootstrap 5 CDN-->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -38,6 +116,9 @@ $categories = get_all_categories($conn);
 
 </head>
 <body>
+<!-- <?php
+  if($message_sent);
+?> -->
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		  <div class="container-fluid">
@@ -138,7 +219,7 @@ $categories = get_all_categories($conn);
                             <div>
                               <h4 class="mb-3 text-light">E-Mail</h4>
                               <p class="mb-0">
-                                <a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="mailto:demo@yourdomain.com">goodbooks4u@gmail.com</a>
+                                <a class="link-light link-opacity-75 link-opacity-100-hover text-decoration-none" href="mailto:goodbookscontact24@gmail.com">goodbookscontact24@gmail.com</a>
                               </p>
                             </div>
                           </div>
@@ -166,7 +247,7 @@ $categories = get_all_categories($conn);
               <div class="col-12 col-lg-6">
                 <div class="row align-items-lg-center h-100">
                   <div class="col-12">
-                    <form action="">
+                    <form action="contactus.php" method="POST">
                       <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
                         <div class="col-12">
                           <label for="fullname" class="form-label">Full Name <span class="text-danger">*</span></label>
@@ -204,7 +285,7 @@ $categories = get_all_categories($conn);
                         </div>
                         <div class="col-12">
                           <div class="d-grid">
-                            <button class="btn btn-primary btn-lg" type="submit">Send Message</button>
+                            <button class="btn btn-primary btn-lg" type="submit" name="submit">Send Message</button>
                           </div>
                         </div>
                       </div>
@@ -219,6 +300,12 @@ $categories = get_all_categories($conn);
     </div>
   </div>
 </section>
+
+<div>
+
+<?= $msg; ?>
+
+</div>
 
         <div class="container">
         <footer class="py-3 my-4">
