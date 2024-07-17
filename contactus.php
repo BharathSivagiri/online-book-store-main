@@ -166,7 +166,7 @@ $categories = get_all_categories($conn);
               <div class="col-12 col-lg-6">
                 <div class="row align-items-lg-center h-100">
                   <div class="col-12">
-                    <form action="https://formsubmit.co/el/duwuze" method="POST">
+                    <form action="">
                       <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
                         <div class="col-12">
                           <label for="fullname" class="form-label">Full Name <span class="text-danger">*</span></label>
