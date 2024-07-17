@@ -183,7 +183,6 @@ $categories = get_all_categories($conn);
                             <input type="email" class="form-control" id="email" name="email" value="" required>
                           </div>
                         </div>
-                        <input type="hidden" name="_next" href="free-simple-card.html">
                         <div class="col-12 col-md-6">
                           <label for="phone" class="form-label">Phone Number</label>
                           <div class="input-group">
@@ -205,7 +204,7 @@ $categories = get_all_categories($conn);
                         </div>
                         <div class="col-12">
                           <div class="d-grid">
-                            <button class="btn btn-primary btn-lg" type="submit" href="free-simple-card.html">Send Message</button>
+                            <button class="btn btn-primary btn-lg" type="submit">Send Message</button>
                           </div>
                         </div>
                       </div>
