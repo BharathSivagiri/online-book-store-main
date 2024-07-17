@@ -166,7 +166,7 @@ $categories = get_all_categories($conn);
               <div class="col-12 col-lg-6">
                 <div class="row align-items-lg-center h-100">
                   <div class="col-12">
-                    <form action="#!">
+                    <form action="https://formsubmit.co/el/duwuze" method="POST">
                       <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
                         <div class="col-12">
                           <label for="fullname" class="form-label">Full Name <span class="text-danger">*</span></label>
@@ -183,6 +183,7 @@ $categories = get_all_categories($conn);
                             <input type="email" class="form-control" id="email" name="email" value="" required>
                           </div>
                         </div>
+                        <input type="hidden" name="_next" href="free-simple-card.html">
                         <div class="col-12 col-md-6">
                           <label for="phone" class="form-label">Phone Number</label>
                           <div class="input-group">
@@ -204,7 +205,7 @@ $categories = get_all_categories($conn);
                         </div>
                         <div class="col-12">
                           <div class="d-grid">
-                            <button class="btn btn-primary btn-lg" type="submit">Send Message</button>
+                            <button class="btn btn-primary btn-lg" type="submit" href="free-simple-card.html">Send Message</button>
                           </div>
                         </div>
                       </div>
