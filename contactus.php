@@ -20,6 +20,8 @@ $categories = get_all_categories($conn);
 
  <?php
 
+//Built-in mail function in php
+
 // $message_sent = false;
 
 //   // echo "<pre>";
@@ -53,6 +55,8 @@ $categories = get_all_categories($conn);
 
 //       }
 //   }
+
+  // Swift Mailer third party mailing service
   $msg = '';
   if(isset($_POST['submit'])){
 
